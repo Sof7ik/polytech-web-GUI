@@ -1,5 +1,5 @@
 import styles from "./mainpage.module.css";
-import {Link, useRouteLoaderData} from "react-router-dom";
+import {Link, useLoaderData} from "react-router-dom";
 import {useState, } from "react";
 import ModalWindow from "../ModalWindow";
 
@@ -8,7 +8,7 @@ let modalOpened, setModalState;
 export default function Mainpage() {
     console.log("rerender")
 
-    const [models] = useState(useRouteLoaderData("root"));
+    const [models, setModels] = useState(useLoaderData());
     [modalOpened, setModalState] = useState(false);
 
     return (
