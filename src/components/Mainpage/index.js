@@ -14,13 +14,15 @@ export default function Mainpage() {
     return (
         <>
             <section className={styles.mainpageSection}>
-                <h1>Список моделей</h1>
+                <div className={styles.titleButtonWrapper}>
+                    <h1 className={styles.mainPageTitle}>Список моделей</h1>
 
-                <button className={`${styles.addModelBtn} btn green`}
-                        data-opened={modalOpened}
-                        onClick={addModelModalHandler}>
-                    Добавить модель
-                </button>
+                    <button className={`${styles.addModelBtn} btn green`}
+                            data-opened={modalOpened}
+                            onClick={addModelModalHandler}>
+                        Добавить модель
+                    </button>
+                </div>
 
                 { models.length ?
                     (<ul className={styles.modelsList}>
