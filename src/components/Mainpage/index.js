@@ -8,7 +8,7 @@ let modalOpened, setModalState;
 export default function Mainpage() {
     console.log("rerender")
 
-    const [models, setModels] = useState(useRouteLoaderData("root"));
+    const [models] = useState(useRouteLoaderData("root"));
     [modalOpened, setModalState] = useState(false);
 
     return (

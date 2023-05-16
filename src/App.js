@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React from "react";
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
@@ -22,7 +21,7 @@ const router = createBrowserRouter([
         element: <DetailModel />,
         errorElement: <ErrorPage />,
         loader: modelDetailLoader,
-    }
+    },
 ]);
 
 
