@@ -1,3 +1,52 @@
 .detail-page {
     background-color: green;
 }
+
+.modelInformation{
+    height: 500px;
+}
+
+button.edit {
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 10px 30px;
+    gap: 10px;
+    background: #DCBA40;
+    border-radius: 10px;
+}
+
+button.edit:hover {
+    background-color: #ff8c00;
+}
+
+button.delete {
+    margin-top: 10px;
+    padding: 10px 30px;
+    gap: 10px;
+    background-color: #DB3636;
+    border-radius: 10px;
+}
+
+button.delete:hover {
+    background-color: red;
+}
+
+.description {
+    width: auto;
+    height: auto;
+}
+
+.modelContainer {
+    float: right;
+    width: 600px;
+    height: 400px;
+    margin-left: 20px;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
+.modelCanvas {
+    width: 100%;
+    height: 100%;
+}
+
