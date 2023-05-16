@@ -1,0 +1,25 @@
+header {
+    margin-bottom: 50px;
+
+    padding: 15px;
+
+    border-bottom: 1px solid #ccc;
+}
+
+.headerInnerWrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerLogo {
+    display: block;
+    width: 100%;
+
+    max-width: 60px;
+}
+
+.headerButtons {
+
+}

@@ -1,6 +1,7 @@
 import styles from "./detail_model.module.css";
 import {useState} from "react";
-import {useRouteLoaderData} from "react-router-dom";
+import {Link, useRouteLoaderData} from "react-router-dom";
+import Header from "../Header";
 
 const handleEditClick = () => {
     console.log('Кнопка "Редактировать" была нажата!');
@@ -22,6 +23,7 @@ export default function DetailModel() {
 
     const formattedDate = formatDate(modelData.time_create);
     return (
+<<<<<<< HEAD
 
         <section className={styles.detailPage}>
 
@@ -48,6 +50,20 @@ export default function DetailModel() {
                 </div>
             </div>
         </section>
+=======
+        <>
+            <Header />
+            <main>
+                <div className="container">
+                    <section className={styles.detailPage}>
+                        <Link to="/">Назад в список</Link>
+
+                        <h1>Модель "{modelData.name_model}"</h1>
+                    </section>
+                </div>
+            </main>
+        </>
+>>>>>>> 0834900 (added login, loginContext and styles)
     );
 }
 
