@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, {useState} from "react";
 import {RouterProvider, createBrowserRouter, BrowserRouter} from "react-router-dom";

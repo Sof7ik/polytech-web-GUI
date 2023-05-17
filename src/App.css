@@ -85,6 +85,10 @@ h1 {
     margin-bottom: 25px;
 }
 
-p {
+p{
+    font-size: 2rem;
+}
+
+li{
     font-size: 2rem;
 }
