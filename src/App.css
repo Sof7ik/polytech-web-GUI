@@ -61,6 +61,8 @@ a.btn
     font-size: 1.6rem;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
+
+    transition: background-color .3s;
 }
 
 .btn.green {
@@ -69,8 +71,13 @@ a.btn
 }
 
 .btn.orange {
-    background-color: orange;
+    background: #DCBA40;
     color: #000;
+}
+@media screen and (hover: hover) {
+    .btn.orange:hover {
+        background-color: #ff8c00;
+    }
 }
 
 .btn.red {

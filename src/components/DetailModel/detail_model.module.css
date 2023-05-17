@@ -1,44 +1,46 @@
-.detail-page {
-    background-color: green;
+.backToList {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    display: block;
+    max-width: max-content;
+    color: #1483E9;
+    text-decoration: none;
+
+    border-bottom: 1px solid #1483E9;
 }
 
 .modelInformation{
-    height: 500px;
+    display: flex;
+    flex-flow: row-reverse nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.modelDesccription {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.modelInformation__buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-top: 10px;
 }
 
 button.edit {
-    margin-top: 10px;
     margin-right: 10px;
-    padding: 10px 30px;
-    gap: 10px;
-    background: #DCBA40;
-    border-radius: 10px;
-}
 
-button.edit:hover {
-    background-color: #ff8c00;
-}
-
-button.delete {
-    margin-top: 10px;
-    padding: 10px 30px;
-    gap: 10px;
-    background-color: #DB3636;
-    border-radius: 10px;
-}
-
-button.delete:hover {
-    background-color: red;
-}
-
-.description {
-    width: auto;
-    height: auto;
+    transition: background-color .3s;
 }
 
 .modelContainer {
-    float: right;
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     height: 400px;
     margin-left: 20px;
     border: 2px solid #ccc;
