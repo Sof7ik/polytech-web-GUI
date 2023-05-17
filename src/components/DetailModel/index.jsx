@@ -39,6 +39,13 @@ export default function DetailModel() {
             </div>
             <div>
                 <h2>Комментарии</h2>
+                <div className={styles.commentList}>
+                    {modelData.comments.map((comment, index) => (
+                        <div key={index} className={styles.commentItem}>
+                            {comment.text}
+                        </div>
+                    ))}
+                </div>
             </div>
         </section>
     );

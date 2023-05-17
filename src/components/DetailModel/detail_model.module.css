@@ -50,3 +50,18 @@ button.delete:hover {
     height: 100%;
 }
 
+.commentList {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.commentItem {
+    background: rgba(108, 171, 230, 0.47);
+    border: 1px solid #1483E9;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    padding: 4px 4px;
+}
+
