@@ -23,7 +23,6 @@ export default function DetailModel() {
 
     const formattedDate = formatDate(modelData.time_create);
     return (
-<<<<<<< HEAD
 
         <section className={styles.detailPage}>
 
@@ -50,7 +49,7 @@ export default function DetailModel() {
                 </div>
             </div>
         </section>
-=======
+
         <>
             <Header />
             <main>
@@ -63,7 +62,6 @@ export default function DetailModel() {
                 </div>
             </main>
         </>
->>>>>>> 0834900 (added login, loginContext and styles)
     );
 }
 
