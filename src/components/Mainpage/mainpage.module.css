@@ -1,17 +1,18 @@
-.modelsList {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 20px 35px;
-
-    padding: 0;
+.mainpageSection {
+    margin-top: 50px;
 }
 
-.modelsList__listItem {
-    display: block;
-    background-color: #ccc;
-    border-radius: 5px;
-    border: 1px solid #7f7f7f;
-    padding: 15px;
+.mainPageTitle {
+    margin-bottom: 0;
+}
+
+.titleButtonWrapper {
+    margin-bottom: 25px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .addModelBtn {
