@@ -1,31 +1,42 @@
 import styles from "./detail_model.module.css";
-import {useContext, useState} from "react";
-import {Link, useRouteLoaderData} from "react-router-dom";
+import React, {useContext, useState} from "react";
+import {Link, Navigate, useRouteLoaderData} from "react-router-dom";
 import Header from "../Header";
 import AuthContext from "../../context/auth.context";
-
-const handleEditClick = () => {
-    console.log('Кнопка "Редактировать" была нажата!');
-    // код редактирования
-};
-
-const handleDeleteClick = () => {
-    console.log('Кнопка "Удалить" была нажата!');
-    // код удаления
-};
-
-const formatDate = dateStr => {
-    if (!dateStr) {
-        return "";
-    }
-
-    const date = new Date(dateStr);
-    return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-};
 
 export default function DetailModel() {
     const [modelData] = useState(useRouteLoaderData("modelDetail"));
     const authContext = useContext(AuthContext);
+
+    let deleted
+
+    const handleEditClick = () => {
+
+    };
+
+    const handleDeleteClick = async () => {
+        try{
+            if (window.confirm("Вы уверены, что хотите удалить эту модель?")) {
+                // Отправляем DELETE-запрос на сервер для удаления объекта модели
+                await fetch(`http://localhost:8000/api/v3/models/${modelData._id}`, {
+                    method: "DELETE",
+                    headers: {"apikey": authContext.apiKey},
+                });
+                window.location.href = "/";
+            }
+        }catch (e) {
+            return e
+        }
+    };
+
+    const formatDate = dateStr => {
+        if (!dateStr) {
+            return "";
+        }
+
+        const date = new Date(dateStr);
+        return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+    };
 
     const formattedDate = formatDate(modelData.time_create);
     return (

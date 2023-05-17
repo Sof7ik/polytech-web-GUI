@@ -1,6 +1,6 @@
 import './App.css';
 import React, {useState} from "react";
-import {RouterProvider, createBrowserRouter, BrowserRouter} from "react-router-dom";
+import {RouterProvider, createBrowserRouter} from "react-router-dom";
 
 // Components
 import MainPage, {loader as modelsLoader} from "./components/Mainpage";
