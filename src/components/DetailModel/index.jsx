@@ -1,6 +1,6 @@
 import styles from "./detail_model.module.css";
 import React, {useContext, useState} from "react";
-import {Link, Navigate, useRouteLoaderData} from "react-router-dom";
+import {Link, useRouteLoaderData} from "react-router-dom";
 import Header from "../Header";
 import AuthContext from "../../context/auth.context";
 
@@ -8,26 +8,28 @@ export default function DetailModel() {
     const [modelData] = useState(useRouteLoaderData("modelDetail"));
     const authContext = useContext(AuthContext);
 
-    let deleted
-
     const handleEditClick = () => {
 
     };
 
-    const handleDeleteClick = async () => {
+    const handleDeleteClick = async (event) => {
         try{
             if (window.confirm("Вы уверены, что хотите удалить эту модель?")) {
                 // Отправляем DELETE-запрос на сервер для удаления объекта модели
-                await fetch(`http://localhost:8000/api/v3/models/${modelData._id}`, {
+                await fetch(`http://localhost:8000/api/v3/models/${modelData._id}/`, {
                     method: "DELETE",
                     headers: {"apikey": authContext.apiKey},
                 });
-                window.location.href = "/";
+                // const data = await response.json();
+                // console.log(data);
+                // window.location.href = "/";
+                // return redirect("/");
             }
+
         }catch (e) {
             return e
         }
-    };
+    }
 
     const formatDate = dateStr => {
         if (!dateStr) {
@@ -35,7 +37,13 @@ export default function DetailModel() {
         }
 
         const date = new Date(dateStr);
-        return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+
+        const dayStr = day < 10 ? `0${day}` : day;
+        const monthStr = month < 10 ? `0${month}` : month;
+
+        return `${dayStr}.${monthStr}.${date.getFullYear()}`;
     };
 
     const formattedDate = formatDate(modelData.time_create);
