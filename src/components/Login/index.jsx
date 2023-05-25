@@ -6,7 +6,7 @@ import styles from "./login.module.css";
 export default function LoginModal({opened, closeHandler}) {
     // console.log("LoginModal");
 
-    const {isLogged, loginHandler, apiKey} = useContext(AuthContext);
+    const {isLogged, loginHandler, apiKey, name} = useContext(AuthContext);
 
     const [inputValue, setInputValue] = useState("");
 
@@ -30,13 +30,14 @@ export default function LoginModal({opened, closeHandler}) {
                 "name": inputValue
             }),
         });
-        if (resp.status === 200) {
+        if (resp.status >= 200 && resp.status < 300 ) {
             const data = await resp.json();
 
             // Authorize user
             loginHandler({
                 isLogged: true,
-                apiKey: data.apiKey
+                apiKey: data.apiKey,
+                name: data.name,
             });
 
             closeHandler(false);

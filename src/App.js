@@ -25,6 +25,7 @@ const router = createBrowserRouter([
     },
 ]);
 
+// получение данных авторизации из localStorage
 function getContextDataFormLocalStorage() {
     const data = JSON.parse(localStorage.getItem("authContext"));
     let returnResult = {};
@@ -32,7 +33,8 @@ function getContextDataFormLocalStorage() {
     if (!data) {
         returnResult = {
             isLogged: false,
-            apiKey: null
+            apiKey: null,
+            name: null,
         }
     }
     else {
@@ -47,21 +49,26 @@ function App() {
 
     const localStorageAuthContext = getContextDataFormLocalStorage();
 
+    // стейт, чтобы перерисовать все приложение, когда залогинимся;
     const [authContextData, setAuthContextData] = useState({
         isLogged: localStorageAuthContext.isLogged,
-        apiKey: localStorageAuthContext.apiKey
+        apiKey: localStorageAuthContext.apiKey,
+        name: localStorageAuthContext.name,
     });
 
+    // заполняет localStorage данными с бекенда
     function setLocalStorageAuthContext(newState) {
         localStorage.setItem("authContext", JSON.stringify(newState));
 
         setAuthContextData(newState);
     }
 
+    // изначальные данные из стейта
     const contextDefaultValue = {
         loggedIn: authContextData.isLogged,
         loginHandler: setLocalStorageAuthContext,
         apiKey: authContextData.apiKey,
+        name: authContextData.name
     }
 
     return (

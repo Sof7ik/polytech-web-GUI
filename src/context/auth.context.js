@@ -3,7 +3,8 @@ import {createContext} from "react";
 const authContext = createContext({
     loggedIn: false,
     loginHandler: () => {},
-    apiKey: null
+    apiKey: null,
+    name: "",
 })
 
 export default  authContext;
