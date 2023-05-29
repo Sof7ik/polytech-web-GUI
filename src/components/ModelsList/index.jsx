@@ -1,11 +1,21 @@
-import {useState} from "react";
-import {Link, useRouteLoaderData} from "react-router-dom";
+import {useEffect, useState} from "react";
+import { Link } from "react-router-dom";
 import styles from "./modelsList.module.css";
 
 export default function ModelsList(props) {
-    console.log("modelsList")
+    const [models, setModels] = useState([]);
 
-    const [models, setModels] = useState(useRouteLoaderData("root"));
+    useEffect(() => {
+        async function getModels() {
+            const response = await fetch(`http://localhost:8000/api/v3/models`);
+            const data = await response.json();
+
+            setModels(data);
+        }
+        getModels();
+    }, [])
+
+    console.log("modelsList")
 
     return (
         <>

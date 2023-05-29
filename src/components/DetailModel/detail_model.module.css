@@ -43,8 +43,10 @@ button.edit {
     max-width: 600px;
     height: 400px;
     margin-left: 20px;
-    border: 2px solid #ccc;
+    border: 2px dashed #ccc;
     box-sizing: border-box;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .modelCanvas {

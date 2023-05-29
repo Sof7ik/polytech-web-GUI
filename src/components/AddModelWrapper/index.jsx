@@ -3,8 +3,14 @@ import styles from "../Mainpage/mainpage.module.css";
 import AddModel from "../AddModel";
 
 export default function AddModelWrapper(props) {
+    // function successCreateCallback() {
+    //     console.log("success callback");
+    //     props.modelsListRerenderHandler(prevState => !prevStazte);
+    // }
+
     const [modalOpened, setModalState] = useState(false);
 
+    // открытие закрытие модалки
     function addModelModalHandler(event) {
         setModalState(prevState => !prevState);
     }

@@ -27,9 +27,11 @@ export default function AddModel(props) {
             }
         });
 
-        if (createResponse.status > 200 && createResponse.status < 300) {
-            const createData = await createResponse.json();
-            console.log(createData);
+        if (createResponse.status >= 200 && createResponse.status < 300) {
+            // закрываем модалку
+
+            props.successCallback();
+            props.closeHandler(null);
         }
     }
 
@@ -48,11 +50,12 @@ export default function AddModel(props) {
         }
     ]
 
-
     const [modelName, setModelName] = useState("");
     const [modelType, setModelType] = useState("ball");
     const [modelCode, setModelCode] = useState("кодим тут");
     const [modelDescription, setModelDescription] = useState("описание");
+
+    console.log(props);
 
     return (
         <ModalWindow title={props.title}
@@ -99,7 +102,7 @@ export default function AddModel(props) {
                               readOnly={true}
                               value={modelCode}
                               onChange={e => setModelCode(e.target.value)}>
-                </textarea>
+                    </textarea>
                 </div>
 
                 <div className={`input-wrapper`}>
@@ -107,7 +110,7 @@ export default function AddModel(props) {
                     <textarea id="model-description"
                               value={modelDescription}
                               onChange={e => setModelDescription(e.target.value)}>>
-                </textarea>
+                    </textarea>
                 </div>
 
                 <button type="submit" className="btn green">

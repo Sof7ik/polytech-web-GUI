@@ -1,12 +1,13 @@
 import styles from "./detail_model.module.css";
 import React, {useContext, useState} from "react";
-import {Link, useRouteLoaderData} from "react-router-dom";
+import {Link, Navigate, useRouteLoaderData} from "react-router-dom";
 import Header from "../Header";
 import AuthContext from "../../context/auth.context";
 
 export default function DetailModel() {
     const [modelData] = useState(useRouteLoaderData("modelDetail"));
     const authContext = useContext(AuthContext);
+    const [isModelDeleted, setIsModalDeleted] = useState(false);
 
     const handleEditClick = () => {
 
@@ -14,18 +15,19 @@ export default function DetailModel() {
 
     const handleDeleteClick = async (event) => {
         try{
+
             if (window.confirm("Вы уверены, что хотите удалить эту модель?")) {
                 // Отправляем DELETE-запрос на сервер для удаления объекта модели
-                await fetch(`http://localhost:8000/api/v3/models/${modelData._id}/`, {
+                const response = await fetch(`http://localhost:8000/api/v3/models/${modelData._id}/`, {
                     method: "DELETE",
                     headers: {"apikey": authContext.apiKey},
                 });
-                // const data = await response.json();
-                // console.log(data);
-                // window.location.href = "/";
-                // return redirect("/");
-            }
+                const data = await response.json();
 
+                if (data.deletedCount === 1) {
+                    setIsModalDeleted(true);
+                }
+            }
         }catch (e) {
             return e
         }
@@ -49,12 +51,16 @@ export default function DetailModel() {
     const formattedDate = formatDate(modelData.time_create);
     return (
         <>
+            {
+                isModelDeleted ? <Navigate to="/"/> : ""
+            }
+
             <Header />
             <main>
                 <div className="container">
                     <section className={styles.detailPage}>
                         <Link to="/" className={styles.backToList}>Назад в список</Link>
-                        <h1>Модель "{modelData.name_model}"</h1>
+                        <h1>Модель "{modelData.name_model}" {modelData._id}</h1>
                         <div className={styles.modelInformation}>
                             <div className={styles.modelContainer}>
                                 <canvas className={styles.modelCanvas}></canvas>
@@ -69,7 +75,7 @@ export default function DetailModel() {
                                 </div>
 
 
-                                { authContext.loggedIn ?
+                                { authContext.loggedIn && authContext.name === modelData.name ?
                                     <div className={styles.modelInformation__buttons}>
                                         <button onClick={handleEditClick} className={`${styles.edit} btn orange`}>Редактировать</button>
                                         <button onClick={handleDeleteClick} className={`${styles.delete} btn red`}>Удалить</button>

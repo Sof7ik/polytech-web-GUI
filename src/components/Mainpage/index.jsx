@@ -1,5 +1,5 @@
 import styles from "./mainpage.module.css";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import Header from "../Header";
 import AuthContext from "../../context/auth.context";
 import ModelsList from "../ModelsList";
@@ -7,6 +7,9 @@ import AddModelWrapper from "../AddModelWrapper";
 
 export default function MainPage() {
     const authContext = useContext(AuthContext);
+    // const [modelsListNeedRerender, setModelsListRerender] = useState(false);
+
+    // modelsListRerenderHandler={setModelsListRerender}
 
     return (
         <>
@@ -27,9 +30,4 @@ export default function MainPage() {
             </main>
         </>
     )
-}
-
-export async function loader() {
-    const response = await fetch(`http://localhost:8000/api/v3/models`);
-    return await response.json();
 }

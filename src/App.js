@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {RouterProvider, createBrowserRouter} from "react-router-dom";
 
 // Components
-import MainPage, {loader as modelsLoader} from "./components/Mainpage";
+import MainPage from "./components/Mainpage";
 import DetailModel, {loader as modelDetailLoader} from "./components/DetailModel";
 import ErrorPage from "./components/404";
 import AuthContext from "./context/auth.context";
@@ -14,7 +14,6 @@ const router = createBrowserRouter([
         id: "root",
         element: <MainPage />,
         errorElement: <ErrorPage />,
-        loader: modelsLoader,
     },
     {
         path: "/models/:id",
