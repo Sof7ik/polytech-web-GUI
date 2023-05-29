@@ -21,7 +21,7 @@ export default function LoginModal({opened, closeHandler}) {
         const formData = new FormData();
         formData.append("name", inputValue);
 
-        const resp = await fetch(`http://localhost:8000/api/v3/login`, {
+        const resp = await fetch(`http://localhost:8000/api/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

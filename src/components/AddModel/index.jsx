@@ -18,7 +18,7 @@ export default function AddModel(props) {
             "comments": []
         }
 
-        const createResponse = await fetch("http://localhost:8000/api/v3/models", {
+        const createResponse = await fetch("http://localhost:8000/api/models", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {

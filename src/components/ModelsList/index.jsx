@@ -7,7 +7,7 @@ export default function ModelsList(props) {
 
     useEffect(() => {
         async function getModels() {
-            const response = await fetch(`http://localhost:8000/api/v3/models`);
+            const response = await fetch(`http://localhost:8000/api/models`);
             const data = await response.json();
 
             setModels(data);

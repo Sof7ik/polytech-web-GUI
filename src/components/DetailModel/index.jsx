@@ -9,16 +9,19 @@ export default function DetailModel() {
     const authContext = useContext(AuthContext);
     const [isModelDeleted, setIsModalDeleted] = useState(false);
 
-    const handleEditClick = () => {
+    const handleEditClick = async (event) => {
+        try {
 
+        }catch (error) {
+            return error
+        }
     };
 
     const handleDeleteClick = async (event) => {
         try{
-
             if (window.confirm("Вы уверены, что хотите удалить эту модель?")) {
                 // Отправляем DELETE-запрос на сервер для удаления объекта модели
-                const response = await fetch(`http://localhost:8000/api/v3/models/${modelData._id}/`, {
+                const response = await fetch(`http://localhost:8000/api/models/${modelData._id}/`, {
                     method: "DELETE",
                     headers: {"apikey": authContext.apiKey},
                 });
@@ -28,8 +31,8 @@ export default function DetailModel() {
                     setIsModalDeleted(true);
                 }
             }
-        }catch (e) {
-            return e
+        }catch (error) {
+            return error
         }
     }
 
@@ -108,6 +111,6 @@ export default function DetailModel() {
 
 export async function loader({params}) {
     const modelId = params.id;
-    const response = await fetch(`http://localhost:8000/api/v3/models/${modelId}`);
+    const response = await fetch(`http://localhost:8000/api/models/${modelId}`);
     return await response.json();
 }
