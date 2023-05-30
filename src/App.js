@@ -44,8 +44,6 @@ function getContextDataFormLocalStorage() {
 }
 
 function App() {
-    // console.log("App")
-
     const localStorageAuthContext = getContextDataFormLocalStorage();
 
     // стейт, чтобы перерисовать все приложение, когда залогинимся;

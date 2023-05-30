@@ -1,9 +1,8 @@
 header {
-    margin-bottom: 50px;
-
     padding: 15px;
 
-    border-bottom: 1px solid #ccc;
+    background-color: var(--dark-color);
+    width: 100%;
 }
 
 .headerInnerWrapper {
@@ -17,9 +16,5 @@ header {
     display: block;
     width: 100%;
 
-    max-width: 60px;
-}
-
-.headerButtons {
-
+    max-width: 150px;
 }

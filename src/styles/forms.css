@@ -18,15 +18,30 @@ textarea {
     align-items: flex-start;
 }
 
+form .input-wrapper:not(:last-of-type) {
+    margin-bottom: 15px;
+}
+
 .input-wrapper label {
     margin-bottom: 5px;
 }
 
 .input-wrapper input[type="text"],
 .input-wrapper input[type="email"],
-.input-wrapper input[type="password"] {
+.input-wrapper input[type="password"],
+.input-wrapper select,
+.input-wrapper textarea
+{
     font-size: 2rem;
     padding: 5px 10px 5px 5px;
+}
+
+.input-wrapper select {
+    cursor: pointer;
+}
+
+textarea[readonly] {
+    cursor: not-allowed;
 }
 
 button[type="submit"] {
