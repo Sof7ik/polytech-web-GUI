@@ -4,6 +4,7 @@ import {Link, Navigate, useRouteLoaderData} from "react-router-dom";
 import Header from "../Header";
 import AuthContext from "../../context/auth.context";
 import fetchConfig from "../../config/fetch.config";
+import Footer from "../Footer";
 
 export default function DetailModel() {
     const [modelData] = useState(useRouteLoaderData("modelDetail"));
@@ -71,6 +72,7 @@ export default function DetailModel() {
             }
 
             <Header />
+
             <main>
                 <div className="container">
                     <section className={styles.detailPage}>
@@ -118,6 +120,8 @@ export default function DetailModel() {
                     </section>
                 </div>
             </main>
+
+            <Footer />
         </>
     );
 }

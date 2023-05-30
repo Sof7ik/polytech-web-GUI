@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 @import "./styles/forms.css";
 
+:root {
+    --dark-color: #1e1e1e;
+    --hover-link-color: #4b6eb9;
+    --light-color: #eee;
+}
+
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -11,6 +17,27 @@ html {
     font-size: 62.5%; /*=== 10px*/
     font-family: "Montserrat", sans-serif;
     scroll-behavior: smooth;
+    color: var(--dark-color);
+}
+
+html, body, #root {
+    height: 100%;
+}
+
+body {
+    background-color: var(--light-color);
+}
+
+#root {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
+main {
+    width: 100%;
+    flex-grow: 1;
+    padding: 40px 0;
 }
 
 .container {
@@ -105,9 +132,23 @@ a {
     font-size: 1.6rem;
     display: block;
     max-width: max-content;
-    color: #1483E9;
+    color: var(--dark-color);
     text-decoration: none;
-    border-bottom: 1px solid #1483E9;
+    border-bottom: 1px solid var(--dark-color);
+
+    transition: color .3s, border .3s;
+}
+@media screen and (hover: hover) {
+    a:hover {
+        color: var(--hover-link-color);
+        border-bottom: 1px solid var(--hover-link-color);
+    }
+}
+@media screen and (hover: none) {
+    a {
+        color: var(--hover-link-color);
+        border-bottom: 1px solid var(--hover-link-color);
+    }
 }
 
 img {

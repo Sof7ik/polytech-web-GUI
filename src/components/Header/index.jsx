@@ -1,4 +1,4 @@
-import logo from "../../logo.svg";
+import logo from "../../logos/mospolytech-logo-white.svg";
 import styles from "./header.module.css";
 import {useContext, useState} from "react";
 import AuthContext from "../../context/auth.context";
