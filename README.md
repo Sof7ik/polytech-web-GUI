@@ -3,6 +3,8 @@
 * Бычков Леонид, гр. 211-324
 * Буянов Всеволод, гр. 211-324
 
+Картинки моделей грузятся [сюда](https://sof7ik.imgbb.com/)
+
 &copy; САПР, 2023
 
 # Getting Started with Create React App
