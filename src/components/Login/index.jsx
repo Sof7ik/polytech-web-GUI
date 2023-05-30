@@ -1,12 +1,13 @@
 import ModalWindow from "../ModalWindow";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useState} from "react";
 import AuthContext from "../../context/auth.context";
 import styles from "./login.module.css";
+import fetchConfig from "../../config/fetch.config";
 
 export default function LoginModal({opened, closeHandler}) {
     // console.log("LoginModal");
 
-    const {isLogged, loginHandler, apiKey, name} = useContext(AuthContext);
+    const {loginHandler} = useContext(AuthContext);
 
     const [inputValue, setInputValue] = useState("");
 
@@ -21,7 +22,7 @@ export default function LoginModal({opened, closeHandler}) {
         const formData = new FormData();
         formData.append("name", inputValue);
 
-        const resp = await fetch(`http://localhost:8000/api/login`, {
+        const resp = await fetch(`${fetchConfig.host}/api/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

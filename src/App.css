@@ -10,6 +10,7 @@
 html {
     font-size: 62.5%; /*=== 10px*/
     font-family: "Montserrat", sans-serif;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -98,4 +99,17 @@ p{
 
 li{
     font-size: 2rem;
+}
+
+a {
+    font-size: 1.6rem;
+    display: block;
+    max-width: max-content;
+    color: #1483E9;
+    text-decoration: none;
+    border-bottom: 1px solid #1483E9;
+}
+
+img {
+    display: block;
 }

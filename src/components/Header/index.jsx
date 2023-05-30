@@ -14,7 +14,6 @@ export default function Header(props) {
     }
 
     function onLogoutBtnClick(e) {
-        console.log("ВЫйти")
         authContext.loginHandler(false);
     }
 
@@ -28,8 +27,8 @@ export default function Header(props) {
                         <div className={styles.headerButtons}>
                             {
                                 !authContext.loggedIn ?
-                                    <button onClick={onLoginBtnClick}>Войти</button> :
-                                    <button onClick={onLogoutBtnClick}>Выйти</button>
+                                    <button className="btn green" onClick={onLoginBtnClick}>Войти</button> :
+                                    <button className="btn red" onClick={onLogoutBtnClick}>Выйти</button>
                             }
 
                         </div>

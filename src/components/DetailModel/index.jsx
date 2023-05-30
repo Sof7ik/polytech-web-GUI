@@ -3,11 +3,12 @@ import React, {useContext, useState} from "react";
 import {Link, Navigate, useRouteLoaderData} from "react-router-dom";
 import Header from "../Header";
 import AuthContext from "../../context/auth.context";
+import fetchConfig from "../../config/fetch.config";
 
 export default function DetailModel() {
     const [modelData] = useState(useRouteLoaderData("modelDetail"));
     const authContext = useContext(AuthContext);
-    const [isModelDeleted, setIsModalDeleted] = useState(false);
+    const [isModelDeleted, setIsModelDeleted] = useState(false);
 
     const handleEditClick = async (event) => {
         try {
@@ -21,14 +22,14 @@ export default function DetailModel() {
         try{
             if (window.confirm("Вы уверены, что хотите удалить эту модель?")) {
                 // Отправляем DELETE-запрос на сервер для удаления объекта модели
-                const response = await fetch(`http://localhost:8000/api/models/${modelData._id}/`, {
+                const response = await fetch(`${fetchConfig.host}/api/models/${modelData._id}/`, {
                     method: "DELETE",
                     headers: {"apikey": authContext.apiKey},
                 });
                 const data = await response.json();
 
                 if (data.deletedCount === 1) {
-                    setIsModalDeleted(true);
+                    setIsModelDeleted(true);
                 }
             }
         }catch (error) {
@@ -36,7 +37,7 @@ export default function DetailModel() {
         }
     }
 
-    const formatDate = dateStr => {
+    const formatDate = (dateStr, type = "h") => {
         if (!dateStr) {
             return "";
         }
@@ -48,10 +49,21 @@ export default function DetailModel() {
         const dayStr = day < 10 ? `0${day}` : day;
         const monthStr = month < 10 ? `0${month}` : month;
 
-        return `${dayStr}.${monthStr}.${date.getFullYear()}`;
+        let resultDateStr = `${dayStr}.${monthStr}.${date.getFullYear()}`;
+
+        if (type === "h t" || type === "ht" || type === "h:t") {
+            const hours = date.getHours() > 10 ? date.getHours()+1 : `0${date.getHours()}`;
+            const minutes = date.getMinutes() > 10 ? date.getMinutes() : `0${date.getMinutes()}`;
+            const seconds = date.getSeconds() > 10 ? date.getSeconds() : `0${date.getSeconds()}}`;
+
+            resultDateStr = `${dayStr}.${monthStr}.${date.getFullYear()} ${hours}:${minutes}:${seconds}`;
+        }
+
+        return resultDateStr;
     };
 
-    const formattedDate = formatDate(modelData.time_create);
+    const dateCreate = formatDate(modelData.time_create, "h");
+    const dateTimeModified = formatDate(modelData.time_updated, "ht");
     return (
         <>
             {
@@ -74,7 +86,8 @@ export default function DetailModel() {
                                     <p><strong>Название: </strong>{modelData.name_model}</p>
                                     <p><strong>Тип модели: </strong>{modelData.type}</p>
                                     <p className={styles.description}><strong>Описание: </strong>{modelData.description}</p>
-                                    <p><strong>Дата создания: </strong>{formattedDate}</p>
+                                    <p><strong>Дата создания: </strong>{dateCreate}</p>
+                                    <p><strong>Дата последнего редактирования: </strong>{dateTimeModified}</p>
                                 </div>
 
 
@@ -111,6 +124,6 @@ export default function DetailModel() {
 
 export async function loader({params}) {
     const modelId = params.id;
-    const response = await fetch(`http://localhost:8000/api/models/${modelId}`);
+    const response = await fetch(`${fetchConfig.host}/api/models/${modelId}`);
     return await response.json();
 }

@@ -1,20 +1,3 @@
 .mainpageSection {
     margin-top: 50px;
 }
-
-.mainPageTitle {
-    margin-bottom: 0;
-}
-
-.titleButtonWrapper {
-    margin-bottom: 25px;
-
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.addModelBtn {
-
-}

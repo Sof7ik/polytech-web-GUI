@@ -1,12 +1,5 @@
 .backToList {
-    font-size: 1.6rem;
     margin-bottom: 10px;
-    display: block;
-    max-width: max-content;
-    color: #1483E9;
-    text-decoration: none;
-
-    border-bottom: 1px solid #1483E9;
 }
 
 .modelInformation{
