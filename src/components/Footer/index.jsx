@@ -31,15 +31,15 @@ export default function Footer(props) {
                         <ul className={styles.footer__developers}>
                             <li>Леонид Бычков
                                 <ul className={styles.footer__devSocials}>
-                                    <li> <a href="https://vk.com/leobychkov" target="_blank">VK</a> </li>
-                                    <li><a href="https://t.me/leobychkov" target="_blank">Telegram</a> </li>
-                                    <li> <a href="https://leobychkov.ru" target="_blank">Сайт</a> </li>
+                                    <li> <a href="https://vk.com/leobychkov" target="_blank" rel="noreferrer">VK</a> </li>
+                                    <li><a href="https://t.me/leobychkov" target="_blank" rel="noreferrer">Telegram</a> </li>
+                                    <li> <a href="https://leobychkov.ru" target="_blank" rel="noreferrer">Сайт</a> </li>
                                 </ul>
                             </li>
                             <li>Сева Буянов
                                 <ul className={styles.footer__devSocials}>
-                                    <li> <a href="https://vk.com/vpbuyanov" target="_blank">VK</a> </li>
-                                    <li> <a href="https://t.me/vpbuyanov" target="_blank">Telegram</a> </li>
+                                    <li> <a href="https://vk.com/vpbuyanov" target="_blank" rel="noreferrer">VK</a> </li>
+                                    <li> <a href="https://t.me/vpbuyanov" target="_blank" rel="noreferrer">Telegram</a> </li>
                                 </ul>
                             </li>
                         </ul>
