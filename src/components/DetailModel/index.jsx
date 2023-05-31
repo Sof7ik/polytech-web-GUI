@@ -105,6 +105,7 @@ export default function DetailModel(props) {
 
     const dateCreate = formatDate(modelData.time_create, "h");
     let dateTimeModified = formatDate(modelData.time_updated, "ht");
+    const imgUrl = modelData.images && modelData.images.full ? modelData.images.full : null;
     const params = useParams()
 
     useEffect(() => {
@@ -130,7 +131,7 @@ export default function DetailModel(props) {
                         <Link to="/" className={styles.backToList}>Назад в список</Link>
                         <h1>Модель "{modelData.name_model}" {modelData._id}</h1>
                         <div className={styles.modelInformation}>
-                            <Scene component={modelData.model}/>
+                            <Scene type={modelData.type}/>
 
                             <div className={styles.modelDesccription}>
                                 <div className={styles.modelInformation__text}>
@@ -159,6 +160,11 @@ export default function DetailModel(props) {
                                                 {modelData.description}
                                             </p>
                                         </div>
+                                    )}
+                                    {imgUrl ? (
+                                        <img src={imgUrl} alt="Изображение модели"/>
+                                    ) : (
+                                        ""
                                     )}
                                     <p>
                                         <strong>Дата создания: </strong>
