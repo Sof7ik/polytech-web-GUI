@@ -4,7 +4,7 @@ import {RouterProvider, createBrowserRouter} from "react-router-dom";
 
 // Components
 import MainPage from "./components/Mainpage";
-import DetailModel, {loader as modelDetailLoader} from "./components/DetailModel";
+import DetailModel from "./components/DetailModel";
 import ErrorPage from "./components/404";
 import AuthContext from "./context/auth.context";
 
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         id: "modelDetail",
         element: <DetailModel />,
         errorElement: <ErrorPage />,
-        loader: modelDetailLoader,
+        // loader: modelDetailLoader,
     },
 ]);
 

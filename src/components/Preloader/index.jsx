@@ -6,11 +6,11 @@ export default function Preloader(props) {
     const [isLoaded, setIsLoaded] = useState(getPreloaderState());
 
     function getPreloaderState() {
-        return JSON.parse(localStorage.getItem("preloader_loaded"));
+        return JSON.parse(sessionStorage.getItem("preloader_loaded"));
     }
 
     function closePreloader() {
-        localStorage.setItem("preloader_loaded", JSON.stringify(true));
+        sessionStorage.setItem("preloader_loaded", JSON.stringify(true));
         setIsLoaded(true);
     }
 

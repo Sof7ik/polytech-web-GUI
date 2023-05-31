@@ -1,17 +1,22 @@
 import styles from "./detail_model.module.css";
-import React, {useContext, useState} from "react";
-import {Link, Navigate, useRouteLoaderData} from "react-router-dom";
+import React, {useContext, useEffect, useState} from "react";
+import {Link, Navigate, useParams} from "react-router-dom";
 import Header from "../Header";
 import AuthContext from "../../context/auth.context";
 import fetchConfig from "../../config/fetch.config";
 import Footer from "../Footer";
+import Scene from "../Scene";
 
-export default function DetailModel() {
-    const [modelData] = useState(useRouteLoaderData("modelDetail"));
+export default function DetailModel(props) {
+    const [modelData, setModelData] = useState({});
+    const [editedModelData, setEditedModelData] = useState({});
+
     const authContext = useContext(AuthContext);
+
     const [isModelDeleted, setIsModelDeleted] = useState(false);
+
     const [isEdit, setIsEdit] = useState(false);
-    const [editedModelData, setEditedModelData] = useState(modelData);
+    const [isEdited, setIsEdited] = useState(false);
 
     const handleDeleteClick = async () => {
         try{
@@ -57,9 +62,9 @@ export default function DetailModel() {
         let resultDateStr = `${dayStr}.${monthStr}.${date.getFullYear()}`;
 
         if (type === "h t" || type === "ht" || type === "h:t") {
-            const hours = date.getHours() > 10 ? date.getHours()+1 : `0${date.getHours()}`;
+            const hours = date.getHours() > 10 ? date.getHours() : `0${date.getHours()}`;
             const minutes = date.getMinutes() > 10 ? date.getMinutes() : `0${date.getMinutes()}`;
-            const seconds = date.getSeconds() > 10 ? date.getSeconds() : `0${date.getSeconds()}}`;
+            const seconds = date.getSeconds() > 10 ? date.getSeconds() : `0${date.getSeconds()}`;
 
             resultDateStr = `${dayStr}.${monthStr}.${date.getFullYear()} ${hours}:${minutes}:${seconds}`;
         }
@@ -85,11 +90,13 @@ export default function DetailModel() {
                 headers: {"apikey": authContext.apiKey, "Content-Type": "application/json"},
                 body: JSON.stringify(newBody),
             });
-            modelData.name_model = name_model
-            modelData.type = type
-            modelData.description = description
-            setEditedModelData(modelData);
+            let newModel = await response.json()
 
+            setModelData( (prevState) => {
+                return {...prevState, newModel}
+            })
+
+            setIsEdited(prevState => !prevState)
 
         }catch (error) {
             return error
@@ -97,7 +104,18 @@ export default function DetailModel() {
     };
 
     const dateCreate = formatDate(modelData.time_create, "h");
-    const dateTimeModified = formatDate(modelData.time_updated, "ht");
+    let dateTimeModified = formatDate(modelData.time_updated, "ht");
+    const params = useParams()
+
+    useEffect(() => {
+        async function loader() {
+            const response = await fetch(`${fetchConfig.host}/models/${params.id}`);
+            const data = await response.json();
+            setModelData(data);
+            setEditedModelData(data);
+        }
+        loader();
+    }, [isEdited, params.id])
     return (
         <>
             {
@@ -112,16 +130,18 @@ export default function DetailModel() {
                         <Link to="/" className={styles.backToList}>Назад в список</Link>
                         <h1>Модель "{modelData.name_model}" {modelData._id}</h1>
                         <div className={styles.modelInformation}>
-                            <div className={styles.modelContainer}>
-                                <canvas className={styles.modelCanvas}></canvas>
-                            </div>
+                            <Scene component={modelData.model}/>
 
                             <div className={styles.modelDesccription}>
                                 <div className={styles.modelInformation__text}>
                                     {isEdit ? (
                                         <div>
                                             <input type="text" name="name_model" value={editedModelData.name_model} onChange={handleInputChange} />
-                                            <input type="text" name="type" value={editedModelData.type} onChange={handleInputChange} />
+                                            <select name="type" onChange={handleInputChange}>
+                                                <option value="cube">Кубик</option>
+                                                <option value="ball">Шарик</option>
+                                                <option value="triangle">Пирамидка</option>
+                                            </select>
                                             <input type="text" name="description" value={editedModelData.description} onChange={handleInputChange} />
                                         </div>
                                     ) : (
@@ -199,10 +219,4 @@ export default function DetailModel() {
             <Footer />
         </>
     );
-}
-
-export async function loader({params}) {
-    const modelId = params.id;
-    const response = await fetch(`${fetchConfig.host}/models/${modelId}`);
-    return await response.json();
 }
