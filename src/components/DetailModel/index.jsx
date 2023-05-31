@@ -23,7 +23,7 @@ export default function DetailModel() {
         try{
             if (window.confirm("Вы уверены, что хотите удалить эту модель?")) {
                 // Отправляем DELETE-запрос на сервер для удаления объекта модели
-                const response = await fetch(`${fetchConfig.host}/api/models/${modelData._id}/`, {
+                const response = await fetch(`${fetchConfig.host}/models/${modelData._id}/`, {
                     method: "DELETE",
                     headers: {"apikey": authContext.apiKey},
                 });
@@ -128,6 +128,6 @@ export default function DetailModel() {
 
 export async function loader({params}) {
     const modelId = params.id;
-    const response = await fetch(`${fetchConfig.host}/api/models/${modelId}`);
+    const response = await fetch(`${fetchConfig.host}/models/${modelId}`);
     return await response.json();
 }

@@ -35,7 +35,7 @@ export default function AddModel(props) {
         const myHeaders = new Headers();
         myHeaders.append("apikey", authContext.apiKey);
 
-        const createResponse = await fetch(`${fetchConfig.host}/api/models`, {
+        const createResponse = await fetch(`${fetchConfig.host}/models`, {
             method: 'POST',
             headers: myHeaders,
             body: formData,
