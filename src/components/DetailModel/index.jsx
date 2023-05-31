@@ -10,16 +10,10 @@ export default function DetailModel() {
     const [modelData] = useState(useRouteLoaderData("modelDetail"));
     const authContext = useContext(AuthContext);
     const [isModelDeleted, setIsModelDeleted] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
+    const [editedModelData, setEditedModelData] = useState(modelData);
 
-    const handleEditClick = async (event) => {
-        try {
-
-        }catch (error) {
-            return error
-        }
-    };
-
-    const handleDeleteClick = async (event) => {
+    const handleDeleteClick = async () => {
         try{
             if (window.confirm("Вы уверены, что хотите удалить эту модель?")) {
                 // Отправляем DELETE-запрос на сервер для удаления объекта модели
@@ -37,6 +31,16 @@ export default function DetailModel() {
             return error
         }
     }
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setEditedModelData({ ...editedModelData, [name]: value });
+    };
+
+    const handleCancelClick = () => {
+        setIsEdit(false);
+        setEditedModelData(modelData);
+    };
 
     const formatDate = (dateStr, type = "h") => {
         if (!dateStr) {
@@ -63,6 +67,35 @@ export default function DetailModel() {
         return resultDateStr;
     };
 
+    const handleSaveClick = async () => {
+        try {
+            setIsEdit(false);
+            const name_model = editedModelData.name_model
+            const type = editedModelData.type
+            const description = editedModelData.description
+
+            let newBody = {
+                "name_model": name_model,
+                "type": type,
+                "description": description
+            }
+
+            const response = await fetch(`${fetchConfig.host}/models/${modelData._id}`, {
+                method: "PATCH",
+                headers: {"apikey": authContext.apiKey, "Content-Type": "application/json"},
+                body: JSON.stringify(newBody),
+            });
+            modelData.name_model = name_model
+            modelData.type = type
+            modelData.description = description
+            setEditedModelData(modelData);
+
+
+        }catch (error) {
+            return error
+        }
+    };
+
     const dateCreate = formatDate(modelData.time_create, "h");
     const dateTimeModified = formatDate(modelData.time_updated, "ht");
     return (
@@ -85,20 +118,62 @@ export default function DetailModel() {
 
                             <div className={styles.modelDesccription}>
                                 <div className={styles.modelInformation__text}>
-                                    <p><strong>Название: </strong>{modelData.name_model}</p>
-                                    <p><strong>Тип модели: </strong>{modelData.type}</p>
-                                    <p className={styles.description}><strong>Описание: </strong>{modelData.description}</p>
-                                    <p><strong>Дата создания: </strong>{dateCreate}</p>
-                                    <p><strong>Дата последнего редактирования: </strong>{dateTimeModified}</p>
+                                    {isEdit ? (
+                                        <div>
+                                            <input type="text" name="name_model" value={editedModelData.name_model} onChange={handleInputChange} />
+                                            <input type="text" name="type" value={editedModelData.type} onChange={handleInputChange} />
+                                            <input type="text" name="description" value={editedModelData.description} onChange={handleInputChange} />
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <p>
+                                                <strong>Название: </strong>
+                                                {modelData.name_model}
+                                            </p>
+                                            <p>
+                                                <strong>Тип модели: </strong>
+                                                {modelData.type}
+                                            </p>
+                                            <p className={styles.description}>
+                                                <strong>Описание: </strong>
+                                                {modelData.description}
+                                            </p>
+                                        </div>
+                                    )}
+                                    <p>
+                                        <strong>Дата создания: </strong>
+                                        {dateCreate}
+                                    </p>
+                                    <p>
+                                        <strong>Дата последнего редактирования: </strong>
+                                        {dateTimeModified}
+                                    </p>
                                 </div>
 
-
-                                { authContext.loggedIn && authContext.name === modelData.name ?
+                                {authContext.loggedIn && authContext.name === modelData.name ? (
                                     <div className={styles.modelInformation__buttons}>
-                                        <button onClick={handleEditClick} className={`${styles.edit} btn orange`}>Редактировать</button>
-                                        <button onClick={handleDeleteClick} className={`${styles.delete} btn red`}>Удалить</button>
+                                        {isEdit ? (
+                                            <>
+                                                <button onClick={handleSaveClick} className={`${styles.edit} btn orange`}>
+                                                    Сохранить
+                                                </button>
+                                                <button onClick={handleCancelClick} className={`${styles.edit} btn red`}>
+                                                    Отменить
+                                                </button>
+                                            </>
+                                        ) : (
+                                            <>
+                                            <button onClick={() => setIsEdit(true)} className={`${styles.edit} btn orange`}>
+                                                Редактировать
+                                            </button>
+                                            <button onClick={handleDeleteClick} className={`${styles.delete} btn red`}>
+                                                Удалить
+                                            </button>
+                                            </>
+                                        )}
+
                                     </div>
-                                    : ""
+                                ) : ""
                                 }
                             </div>
                         </div>

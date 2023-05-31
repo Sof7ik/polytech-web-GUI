@@ -62,3 +62,18 @@ button.edit {
     padding: 4px 4px;
 }
 
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border: 1px solid #1483E9;
+    box-shadow: 0px 0px 5px 0px rgba(20, 131, 233, 0.5);
+}
