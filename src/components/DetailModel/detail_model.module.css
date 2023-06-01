@@ -77,3 +77,9 @@ select:focus {
     border: 1px solid #1483E9;
     box-shadow: 0 0 5px 0 rgba(20, 131, 233, 0.5);
 }
+
+.modelImage {
+    width: 100%;
+    max-width: 300px;
+    margin: 20px 0;
+}

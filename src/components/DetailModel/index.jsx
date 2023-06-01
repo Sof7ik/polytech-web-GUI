@@ -8,16 +8,16 @@ import Footer from "../Footer";
 import Scene from "../Scene";
 
 export default function DetailModel(props) {
-    const [modelData, setModelData] = useState({});
-    const [editedModelData, setEditedModelData] = useState({});
 
     const authContext = useContext(AuthContext);
 
+    const [modelData, setModelData] = useState({});
+    const [editedModelData, setEditedModelData] = useState({});
     const [isModelDeleted, setIsModelDeleted] = useState(false);
-
     const [isEdit, setIsEdit] = useState(false);
     const [isEdited, setIsEdited] = useState(false);
 
+    console.log(modelData.images);
     const handleDeleteClick = async () => {
         try{
             if (window.confirm("Вы уверены, что хотите удалить эту модель?")) {
@@ -117,11 +117,10 @@ export default function DetailModel(props) {
         }
         loader();
     }, [isEdited, params.id])
+
     return (
         <>
-            {
-                isModelDeleted ? <Navigate to="/"/> : ""
-            }
+            { isModelDeleted ? <Navigate to="/"/> : "" }
 
             <Header />
 
@@ -161,11 +160,7 @@ export default function DetailModel(props) {
                                             </p>
                                         </div>
                                     )}
-                                    {imgUrl ? (
-                                        <img src={imgUrl} alt="Изображение модели"/>
-                                    ) : (
-                                        ""
-                                    )}
+                                    { imgUrl ? <img src={imgUrl} className={styles.modelImage} alt="Изображение модели"/> : "" }
                                     <p>
                                         <strong>Дата создания: </strong>
                                         {dateCreate}
@@ -197,7 +192,6 @@ export default function DetailModel(props) {
                                             </button>
                                             </>
                                         )}
-
                                     </div>
                                 ) : ""
                                 }
